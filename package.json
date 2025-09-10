@@ -11,6 +11,8 @@
     "preview": "rsbuild preview"
   },
   "dependencies": {
+    "@aws-sdk/types": "3.734.0",
+    "@compratodo/ui-components": "^1.5.8",
     "aws-amplify": "^6.15.5",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
