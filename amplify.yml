@@ -13,19 +13,7 @@ frontend:
   phases:
     build:
       commands:
-        # Detecta entorno según la rama
-        - |
-          if [ "$AWS_BRANCH" = "develop" ]; then
-            export NG_ENV=development
-          elif [ "$AWS_BRANCH" = "master" ]; then
-            export NG_ENV=production
-          else
-            export NG_ENV=development  # Valor por defecto
-          fi
-          echo "Usando configuración Angular: $NG_ENV"
-
-        # Construye la app Angular usando la configuración detectada
-        - npm run build -- --mode $NG_ENV
+        - npm run build
 
   artifacts:
     baseDirectory: dist
