@@ -25,7 +25,7 @@ frontend:
           echo "Usando configuración Angular: $NG_ENV"
 
         # Construye la app Angular usando la configuración detectada
-        - npm run build -- --configuration=$NG_ENV
+        - npm run build -- --mode $NG_ENV
 
   artifacts:
     baseDirectory: dist
