@@ -1,0 +1,15 @@
+.RegisterLayout {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100vh;
+}
+
+.info {
+    max-width: 628px;
+}
+
+@media (min-width: 768px) {
+    .RegisterLayout {
+        padding: 27px 51px;
+    }
+}
