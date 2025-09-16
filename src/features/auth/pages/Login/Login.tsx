@@ -9,7 +9,7 @@ const LoginPage = async () => {
             if (type === "message") {
                 const { token, refreshToken } = data;
                 if (!token) {
-                    window.location.href = import.meta.env.VITE_AUTH_MT_VIEW_CP + "?prefix=dev.";
+                    window.location.href = import.meta.env.VITE_AUTH_MT_VIEW_CP + "?prefix=dev";
                     return;
                 }
                 document.cookie = `access_token=${token}; path=/; secure; samesite=Strict; max-age=7200`;
