@@ -8,17 +8,13 @@ export const routes: RouteObject[] = [
   {
     path: "/login",
     element: (
-      <Suspense fallback={<div>Cargando...</div>}>
-        <LoginPage />
-      </Suspense>
+      <LoginPage />
     ),
   },
   {
     path: "/register",
     element: (
-      <Suspense fallback={<div>Cargando...</div>}>
-        <RegisterPage />
-      </Suspense>
+      <RegisterPage />
     ),
   },
   {

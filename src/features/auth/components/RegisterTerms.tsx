@@ -3,29 +3,10 @@ import "./RegisterTerms.css";
 import { Button, Card } from "@compratodo/ui-components";
 import { TermItem } from "./TermItem";
 import { useRegisterTerms } from "../hooks/useRegisterTerms";
-import TermModal from './TermModal';
+
+import { checkboxTerms } from '../schemas/index';
 
 const RegisterTerms = () => {
-    // ✅ Usa un id único para cada término, no solo el label
-    const checkboxTerms = [
-        {
-            id: "acceptDataUser",
-            label:
-                "Doy mi consentimiento para el uso de mis datos conforme a la declaración de privacidad",
-            component: <TermModal />,
-        },
-        {
-            id: "acceptDataManagement",
-            label: "Apruebo el manejo de mis datos personales.",
-            component: <TermModal />,
-        },
-        {
-            id: "acceptUserConditions",
-            label:
-                "Estoy de acuerdo con los términos y condiciones generales de uso de compra todo.",
-            component: <TermModal />,
-        },
-    ];
 
     const { acceptTerms } = useRegisterTerms();
 

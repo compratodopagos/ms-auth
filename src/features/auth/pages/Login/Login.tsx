@@ -1,19 +1,37 @@
-import CheckSession from './checkSession';
+import { useEffect } from 'react';
 import './Login.css';
-import { LoginAside } from './LoginAside';
-import { LoginSectForm } from './LoginForm';
-import { useState } from 'react';
 
 const LoginPage = async () => {
-    const [sessionChecked, setSessionChecked] = useState(false);
+    useEffect(() => {
+        const handleMessage = ({ origin, data, type }) => {
+            if (origin !== import.meta.env.VITE_AUTH_MT) return;
+
+            if (type === "message") {
+                const { token, refreshToken } = data;
+                if (!token) {
+                    window.location.href = import.meta.env.VITE_AUTH_MT_VIEW_CP;
+                    return;
+                }
+                document.cookie = `access_token=${token}; path=/; secure; samesite=Strict; max-age=7200`;
+                document.cookie = `refresh_token=${refreshToken}; path=/; secure; samesite=Strict; max-age=${60 * 60 * 24 * 7}`;
+                window.location.href = import.meta.env.VITE_ORIGIN;
+            }
+
+            if (data?.type === "AUTH_ERROR") {
+                console.error("❌ Error en login silencioso:", data.error);
+            }
+        };
+        window.addEventListener("message", handleMessage);
+        return () => window.removeEventListener("message", handleMessage);
+    }, []);
     return (
-        !sessionChecked ? 
-            <CheckSession setSessionChecked={setSessionChecked} />
-        :
-        <div className='LoginLayout grid-2 bg-white min-h-screen'>
-            <LoginSectForm />
-            <LoginAside />
-        </div>
+        <>
+            <iframe
+                src="https://auth.compratodo.com/silent-login"
+                style={{ display: 'none' }}
+            ></iframe>
+            <span>Cargando...</span>
+        </>
     );
 };
 

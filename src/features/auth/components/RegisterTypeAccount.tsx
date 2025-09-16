@@ -2,6 +2,7 @@ import { Button, Card } from '@compratodo/ui-components';
 import { BusinnessBold, WalletBold } from '../../../app/icons';
 import './RegisterTypeAccount.css';
 import { useRegisterFlow } from '../hooks/useRegisterFlow';
+import IconCardCircle from './IconCardCircle';
 
 const InfoCard = ({
     title,
@@ -14,11 +15,7 @@ const InfoCard = ({
     return (
         <Card title="" border={false} className='flex justify-center items-center'>
             <div className='info-card'>
-                <div className='flex justify-center items-center'>
-                    <div className="sect-icon rounded-full flex flex justify-center items-center">
-                        {icon}
-                    </div>
-                </div>
+                <IconCardCircle icon={icon} />
                 <div className="mt-4 mb-4">
                     <h4>{title}</h4>
                     <p>{description}</p>
