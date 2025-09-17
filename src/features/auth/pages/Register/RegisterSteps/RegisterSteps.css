@@ -1,0 +1,26 @@
+.container.steps {
+    max-width: 1200px;
+}
+
+.container.steps label {
+    color: #000000;
+}
+
+.container.steps p {
+    color: #565656;
+}
+
+.step .sect-icon { 
+    width: 52.25px;
+    height: 52.25px;
+}
+
+.step > .flex:first-child > .flex {
+    margin-right: 15px;
+}
+
+@media (min-width: 768px) {
+    .step {
+        grid-template-columns: 1fr auto;
+    }
+}

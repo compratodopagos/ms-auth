@@ -1,3 +1,4 @@
+import styles from './TermItem.module.css';
 import { Card, Button, Modal } from '@compratodo/ui-components';
 
 // components/TermItem.tsx
@@ -14,9 +15,10 @@ export const TermItem = ({
     onOpenModal: () => void;
     isModalOpen: boolean;
 }) => (
-    <Card title="" className="grid-3 terms mb-2">
-        <div className="flex items-center check">
+    <Card title="" className={`grid-3 ${styles.terms} mb-2`}>
+        <div className={`flex items-center ${styles.check}`}>
             <input
+                className={styles.checkbox}
                 type="checkbox"
                 id={`term-${term.id}`}
                 checked={checked}
@@ -24,7 +26,7 @@ export const TermItem = ({
             />
         </div>
 
-        <label className="flex items-center label" htmlFor={`term-${term.id}`}>
+        <label className={`flex items-center ${styles.label}`} htmlFor={`term-${term.id}`}>
             <p className="ml-2 mr-2">{term.label}</p>
         </label>
 

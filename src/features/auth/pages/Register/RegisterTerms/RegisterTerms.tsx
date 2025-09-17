@@ -1,47 +1,64 @@
-import { useState } from "react";
-import "./RegisterTerms.css";
+import styles from "./RegisterTerms.module.css";
+import { useState, useEffect, useCallback } from "react";
 import { Button, Card } from "@compratodo/ui-components";
 import { TermItem } from "./TermItem";
-import { useRegisterTerms } from "../hooks/useRegisterTerms";
+import { useRegisterTerms } from "../../../hooks/useRegisterTerms";
+import { checkboxTerms } from "../../../schemas/index";
+import { useNavigate } from "react-router-dom";
 
-import { checkboxTerms } from '../schemas/index';
-
-const RegisterTerms = () => {
-
+const RegisterTerms: React.FC = () => {
+    const navigate = useNavigate();
     const { acceptTerms } = useRegisterTerms();
 
+    /**
+     * Si no hay typeAccount en localStorage, redirige al inicio del registro.
+     * Se ejecuta solo una vez al montar (steps no es necesario aquí,
+     * salvo que lo uses para otras validaciones dinámicas).
+     */
+    useEffect(() => {
+        const typeAccount = localStorage.getItem("typeAccount");
+        if (!typeAccount) navigate("/register");
+    }, [navigate]);
+
+    // Estado de checkboxes y modal abierto
     const [checkedItems, setCheckedItems] = useState<boolean[]>(
-        Array(checkboxTerms.length).fill(false)
+        () => Array(checkboxTerms.length).fill(false)
     );
     const [openModalIndex, setOpenModalIndex] = useState<number | null>(null);
 
-    const handleCheckboxChange = (index: number) => {
-        const updated = [...checkedItems];
-        updated[index] = !updated[index];
-        setCheckedItems(updated);
-    };
+    const handleCheckboxChange = useCallback((index: number) => {
+        setCheckedItems(prev => {
+            const updated = [...prev];
+            updated[index] = !updated[index];
+            return updated;
+        });
+    }, []);
 
     const allChecked = checkedItems.every(Boolean);
 
-    const handleContinue = () => {
-        if (!allChecked) return;
-
-        // ✅ Construir objeto { privacy: true, data: true, conditions: true }
+    /**
+     * Construye el objeto { privacy: true, data: true, ... }
+     * basado en los checkboxes seleccionados
+     */
+    const buildAcceptedObject = useCallback((): Record<string, boolean> => {
         const accepted: Record<string, boolean> = {};
         checkboxTerms.forEach((term, i) => {
             accepted[term.id] = checkedItems[i];
         });
+        return accepted;
+    }, [checkedItems]);
 
-        // Guarda en localStorage + redux
-        acceptTerms(accepted);
-    };
+    const handleContinue = useCallback(() => {
+        if (!allChecked) return;
+        acceptTerms(buildAcceptedObject());
+    }, [allChecked, acceptTerms, buildAcceptedObject]);
 
     return (
         <div className="text-center">
             <div className="flex justify-center mb-4">
                 <div className="info">
                     <h1>¡Bienvenido! Te invitamos a revisar nuestras políticas de uso</h1>
-                    <p>
+                    <p className={styles.p}>
                         Selecciona el tipo de cuenta que mejor se adapte a tus necesidades.
                         Gestiona tus pagos de manera segura y eficiente.
                     </p>

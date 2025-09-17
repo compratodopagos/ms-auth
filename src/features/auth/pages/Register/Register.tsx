@@ -1,14 +1,14 @@
-import './Register.css';
+import styles from "./Register.module.css";
 import { Navbar } from '../../../../app/layout/Navbar';
-import { MainRegister } from '../../components/MainRegister';
 import Footer from '../../../../app/layout/Footer';
+import { Outlet } from 'react-router-dom';
 
 const RegisterPage = () => {
   return (
-    <div className='RegisterLayout p-4'>
+    <div className={`${styles.RegisterLayout} p-4`}>
       <Navbar />
       <main className="flex-1 flex flex-col items-center justify-center px-6 py-10">
-        <MainRegister />
+        <Outlet />
       </main>
       <Footer />
     </div>

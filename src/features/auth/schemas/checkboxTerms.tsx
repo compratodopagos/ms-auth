@@ -1,4 +1,4 @@
-import TermModal from '../components/TermModal';
+import TermModal from '../pages/Register/RegisterTerms/TermModal';
 
 export const checkboxTerms = [
     {

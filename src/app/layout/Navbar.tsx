@@ -6,7 +6,7 @@ export const Navbar = () => {
     return (
         <header className="flex justify-between items-center">
             <Link href="#" onClick={() => navigate('/')}>
-                <img src="images/logo.svg" alt="logo" className="h-8" />
+                <img src="/images/logo.svg" alt="logo" className="h-8" />
             </Link>
             <nav className="flex gap-4 text-sm">
                 <a href="/">Inicio</a>

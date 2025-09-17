@@ -14,11 +14,7 @@
     }
 }
 
-p {
-    margin-bottom: 0;
-}
-
-input[type="checkbox"] {
+.checkbox {
     position: relative;
     appearance: none;
     /* quita el estilo nativo */
@@ -34,13 +30,13 @@ input[type="checkbox"] {
     cursor: pointer;
 }
 
-input[type="checkbox"]:checked {
+.checkbox:checked {
     background-color: var(--color-accent);
     /* color cuando está marcado */
     border-color: var(--color-accent);
 }
 
-input[type="checkbox"]:checked::after {
+.checkbox:checked::after {
     content: "✔";
     /* el ícono */
     color: var(--color-accent);

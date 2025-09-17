@@ -1,8 +1,7 @@
 import { Button, Card } from '@compratodo/ui-components';
-import { BusinnessBold, WalletBold } from '../../../app/icons';
-import './RegisterTypeAccount.css';
-import { useRegisterFlow } from '../hooks/useRegisterFlow';
-import IconCardCircle from './IconCardCircle';
+import { BusinnessBold, WalletBold } from '../../../../../app/icons';
+import IconCardCircle from '../../../components/IconCardCircle';
+import { useRegisterFlow } from '../../../hooks/useRegisterFlow';
 
 const InfoCard = ({
     title,
@@ -14,8 +13,8 @@ const InfoCard = ({
 }) => {
     return (
         <Card title="" border={false} className='flex justify-center items-center'>
-            <div className='info-card'>
-                <IconCardCircle icon={icon} />
+            <div style={{ maxWidth: '300px' }}>
+                <IconCardCircle>{icon}</IconCardCircle>
                 <div className="mt-4 mb-4">
                     <h4>{title}</h4>
                     <p>{description}</p>
@@ -28,13 +27,15 @@ const InfoCard = ({
     );
 }
 
-export const RegisterTypeAccount = () => {
+const RegisterTypeAccount = () => {
     const { setAccount } = useRegisterFlow();
     return (
         <div className='text-center'>
-            <div className="info">
-                <h1>Elige tu tipo de cuenta</h1>
-                <p>Selecciona el tipo de cuenta que mejor se adapte a tus necesidades. Gestiona tus pagos de manera segura y eficiente.</p>
+            <div className="flex justify-center">
+                <div className="info">
+                    <h1>Elige tu tipo de cuenta</h1>
+                    <p>Selecciona el tipo de cuenta que mejor se adapte a tus necesidades. Gestiona tus pagos de manera segura y eficiente.</p>
+                </div>
             </div>
             <div className="grid-2">
                 <InfoCard
@@ -55,3 +56,5 @@ export const RegisterTypeAccount = () => {
         </div>
     );
 }
+
+export default RegisterTypeAccount;

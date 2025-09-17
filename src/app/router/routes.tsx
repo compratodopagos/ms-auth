@@ -2,7 +2,8 @@ import { lazy, Suspense } from "react";
 import { Navigate, RouteObject } from "react-router-dom";
 
 const LoginPage = lazy(() => import("../../features/auth/pages/Login/Login"));
-const RegisterPage = lazy(() => import("../../features/auth/pages/Register/Register"));
+
+import { registerRoutes } from '../../features/auth/pages/Register/router/registerRoutes'
 
 export const routes: RouteObject[] = [
   {
@@ -13,9 +14,7 @@ export const routes: RouteObject[] = [
   },
   {
     path: "/register",
-    element: (
-      <RegisterPage />
-    ),
+    children: registerRoutes
   },
   {
     path: "*",
