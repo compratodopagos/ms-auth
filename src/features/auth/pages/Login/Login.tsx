@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
 import './Login.css';
 
-const LoginPage = async () => {
+const LoginPage = async ({
+    redirect = true
+}) => {
     useEffect(() => {
         const handleMessage = ({ origin, data, type }) => {
             if (origin !== import.meta.env.VITE_AUTH_MT) return;
@@ -14,7 +16,8 @@ const LoginPage = async () => {
                 }
                 document.cookie = `access_token=${token}; path=/; secure; samesite=Strict; max-age=7200`;
                 document.cookie = `refresh_token=${refreshToken}; path=/; secure; samesite=Strict; max-age=${60 * 60 * 24 * 7}`;
-                window.location.href = import.meta.env.VITE_ORIGIN + "/home";
+                if(redirect)
+                    window.location.href = import.meta.env.VITE_ORIGIN + "/home";
             }
 
             if (data?.type === "AUTH_ERROR") {

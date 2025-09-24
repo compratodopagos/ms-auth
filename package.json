@@ -11,10 +11,11 @@
   },
   "dependencies": {
     "@compratodo/core": "^1.0.8",
-    "@compratodo/ui-components": "^1.7.10",
+    "@compratodo/ui-components": "^1.7.18",
     "@reduxjs/toolkit": "^2.9.0",
     "aws-amplify": "^6.15.6",
     "aws-sdk": "^2.1692.0",
+    "bcryptjs": "^3.0.2",
     "lucide-react": "^0.543.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",

@@ -8,7 +8,7 @@ export const poolCT = await mysql.createPool({
   host: secret_ct.host,
   user: secret_ct.username,
   password: secret_ct.password,
-  database: 'ctp_auth'
+  database: 'auth_db'
 });
 
 export const pool = await mysql.createPool({

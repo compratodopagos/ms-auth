@@ -1,6 +1,7 @@
 import { useCallback, useMemo } from "react";
-import { Card, Button } from "@compratodo/ui-components";
+import { Card, Button, Tooltip } from "@compratodo/ui-components";
 import IconCardCircle from "../IconCardCircle";
+import { CheckCircle } from "../../../../app/icons";
 import {
     MailPlus,
     Smartphone,
@@ -77,19 +78,27 @@ export const CardStep = ({
             </div>
 
             <div className="flex items-center justify-center">
-                <Button
-                    type="button"
-                    size="xs"
-                    variant={isActive[idx] ? "accent" : "light"}
-                    disabled={!isActive[idx]}
-                    aria-disabled={!isActive[idx]}
-                    onClick={() => navigateStep(step, idx)}
-                >
-                    <div className="flex items-center justify-center m-0">
-                        <b className="mr-1">Agregar</b>
-                        <PlusCircle width={18} />
-                    </div>
-                </Button>
+                {
+                    step.completed ?
+                        <Tooltip title="Completado" content="Completado">
+                            <CheckCircle color="var(--color-accent)" stroke="var(--color-primary)" className="w-8" />
+                        </Tooltip>
+                        :
+                        <Button
+                            type="button"
+                            size="xs"
+                            variant={isActive[idx] ? "accent" : "light"}
+                            disabled={!isActive[idx]}
+                            aria-disabled={!isActive[idx]}
+                            onClick={() => navigateStep(step, idx)}
+                            className='container'
+                        >
+                            <div className="flex items-center justify-center m-0">
+                                <b className="mr-1">Agregar</b>
+                                <PlusCircle width={18} />
+                            </div>
+                        </Button>
+                }
             </div>
         </Card>
     );

@@ -1,5 +1,7 @@
 import { lazy } from "react";
 import { Navigate, RouteObject } from "react-router-dom";
+import RegisterEmailValidStep from "../RegisterEmailStep/RegisterEmailValidStep";
+import RegisterPasswordStep from "../RegisterPasswordStep/RegisterPasswordStep";
 
 const Register = lazy(() => import("../Register"));
 const RegisterTypeAccount = lazy(() => import("../RegisterTypeAccount/RegisterTypeAccount"));
@@ -25,10 +27,24 @@ export const registerRoutes: RouteObject[] = [
         children: [
           {
             path: "",
-            element: (<RegisterSteps /> )
-          },{
+            element: (<RegisterSteps />)
+          },
+          {
             path: "email",
-            element: (<RegisterEmailStep /> )
+            children: [
+              {
+                path: "",
+                element: (<RegisterEmailStep />)
+              },
+              {
+                path: "valid",
+                element: (<RegisterEmailValidStep />)
+              }
+            ]
+          },
+          {
+            path: "password",
+            element: (<RegisterPasswordStep />)
           }
         ]
       }

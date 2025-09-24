@@ -1,7 +1,7 @@
 import styles from './RegisterEmailStep.module.css'
 import { useState } from 'react'
 import { Card, FormBuilder, Validators } from '@compratodo/ui-components';
-import { useNavigate } from 'react-router-dom';
+import { useRegisterFlow } from '../../../hooks/useRegisterFlow';
 
 const emailSchema = {
     email: {
@@ -15,12 +15,15 @@ const emailSchema = {
 
 const RegisterEmailStep = () => {
 
-    const navigate = useNavigate();
+    const { setEmail } = useRegisterFlow();
     const [loading, setLoading] = useState(false);
-    const handleSubmit = ({ email }) => {
+    const [error, setError] = useState<string>();
+    const handleSubmit = async ({ email }) => {
         setLoading(true);
-        localStorage.setItem('email',email);
-        navigate('./valid');
+        const errorMsg = await setEmail(email);
+        if(errorMsg){
+            setError(errorMsg);
+        }
     }
 
     return (
@@ -28,6 +31,7 @@ const RegisterEmailStep = () => {
             <div className={`${styles.info} text-center`}>
                 <h2>Ingresa tu correo electrónico</h2>
                 <p>Verifica que tengas acceso a él.</p>
+                { error? <span className='text-[var(--color-danger)]'>* { error }</span> : null }
                 <div className="text-left mt-6">
                     <FormBuilder
                         schema={emailSchema}

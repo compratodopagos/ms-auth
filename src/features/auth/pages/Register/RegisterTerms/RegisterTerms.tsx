@@ -5,10 +5,12 @@ import { TermItem } from "./TermItem";
 import { useRegisterTerms } from "../../../hooks/useRegisterTerms";
 import { checkboxTerms } from "../../../schemas/index";
 import { useNavigate } from "react-router-dom";
+import { useRegisterFlow } from "../../../hooks/useRegisterFlow";
 
 const RegisterTerms: React.FC = () => {
     const navigate = useNavigate();
     const { acceptTerms } = useRegisterTerms();
+    const { getTA } = useRegisterFlow();
 
     /**
      * Si no hay typeAccount en localStorage, redirige al inicio del registro.
@@ -16,7 +18,7 @@ const RegisterTerms: React.FC = () => {
      * salvo que lo uses para otras validaciones dinámicas).
      */
     useEffect(() => {
-        const typeAccount = localStorage.getItem("typeAccount");
+        const typeAccount = getTA();
         if (!typeAccount) navigate("/register");
     }, [navigate]);
 
