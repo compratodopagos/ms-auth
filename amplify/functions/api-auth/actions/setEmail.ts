@@ -1,7 +1,7 @@
 import { Pool } from "mysql2/promise";
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 
-const sendCode = async (email: string) => {
+const sendCode = async (email: string): Promise<any> => {
     const API_URL = process.env.API_URL;
     const response = await fetch(
         `${API_URL}/public/auth/verify/email/send`,
@@ -12,13 +12,17 @@ const sendCode = async (email: string) => {
         }
     );
 
+    console.log('payload',{
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email }),
+        })
+    console.log('response',response)
+
     if (!response.ok) {
-        const text = await response.text();
+        const text = await response.json;
         console.error("Fallo al enviar código:", text);
-        return {
-            success: false,
-            details: text
-        }
+        return text
     }
 
     return {
@@ -28,7 +32,7 @@ const sendCode = async (email: string) => {
 
 export const setEmail = async (event: APIGatewayProxyEvent, pool: Pool, poolCT: Pool): Promise<APIGatewayProxyResult> => {
     try {
-        const { email } = JSON.parse(event.body || '{}');
+        const { email, type_account } = JSON.parse(event.body || '{}');
 
         if (!email || typeof email !== "string") {
             return {
@@ -37,25 +41,26 @@ export const setEmail = async (event: APIGatewayProxyEvent, pool: Pool, poolCT: 
             };
         }
 
-        const emailDecoded = Buffer.from(email, "base64").toString("utf-8");
+        const emailDecoded = email.includes('@')? email : Buffer.from(email, "base64").toString("utf-8");
 
         // 2. Verificar si el usuario ya existe
         const [rows] = await poolCT.query(
-            "SELECT id FROM users WHERE email = ? LIMIT 1",
+            "SELECT id, password FROM users WHERE email = ? LIMIT 1",
             [emailDecoded]
         );
 
         const users = (rows as any[]);
         if (users.length > 0) {
             const user = users[0];
+            console.log('u',user)
             if (user.password) {
                 return {
-                    statusCode: 409,
+                    statusCode: 200,
                     body: JSON.stringify({ message: "Ya existe un usuario con ese correo" }),
                 };
             } else {
                 try {
-                    const { success, details } = await sendCode(emailDecoded);
+                    const { success, message } = await sendCode(emailDecoded);
                     if (success) {
                         return {
                             statusCode: 200,
@@ -69,7 +74,8 @@ export const setEmail = async (event: APIGatewayProxyEvent, pool: Pool, poolCT: 
                             statusCode: 409,
                             body: JSON.stringify({
                                 error: "Error al enviar el código de verificación",
-                                details
+                                emailDecoded,
+                                message
                             }),
                         };
                     }
@@ -88,8 +94,8 @@ export const setEmail = async (event: APIGatewayProxyEvent, pool: Pool, poolCT: 
 
         // 3. Crear el nuevo usuario
         const [result] = await poolCT.query(
-            "INSERT INTO users (name, email, created_at) VALUES ('prospect',?, NOW())",
-            [emailDecoded]
+            "INSERT INTO users (name, email, type_account, created_at, accepted_terms) VALUES ('prospect',?, ?, NOW(), 1)",
+            [emailDecoded, type_account]
         );
         const { success, details } = await sendCode(emailDecoded);
         if (!success) {

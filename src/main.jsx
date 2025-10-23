@@ -1,12 +1,15 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
 import './index.css'
 import '@compratodo/ui-components/dist/ui-components.css';
-import App from './app/App.jsx'; 
+
+import { createRoot } from 'react-dom/client'
+import { StrictMode } from 'react'
+
+import App from './ui/App'; 
 
 import { Amplify } from 'aws-amplify';
 import { parseAmplifyConfig } from "aws-amplify/utils";
 import outputs from '../amplify_outputs.json';
+import '@aws-amplify/ui-react/styles.css';
 const amplifyConfig = parseAmplifyConfig(outputs);
 
 Amplify.configure(

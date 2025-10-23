@@ -17,10 +17,12 @@ export function configApi(backend: any) {
 
     // Crear un nuevo stack para la API
     const apiStack = backend.createStack("api-auth-stack");
-    const domain: string[] = ['*.comprapagos.com'];
+    const allowedOrigins = [
+        'https://comprapagos.com',
+    ];
 
-    if(!process.env.stageName || process.env.stageName == 'dev'){
-        domain.push('http://localhost:5173')
+    if (!process.env.stageName || process.env.stageName == 'local') {
+        allowedOrigins.push('https://localhost:5173')
     }
 
     // Crear la API REST
@@ -31,7 +33,7 @@ export function configApi(backend: any) {
             stageName: process.env.stageName || "local",
         },
         defaultCorsPreflightOptions: {
-            allowOrigins: domain,
+            allowOrigins: allowedOrigins,
             allowMethods: Cors.ALL_METHODS,
             allowHeaders: Cors.DEFAULT_HEADERS,
             allowCredentials: true
@@ -44,22 +46,22 @@ export function configApi(backend: any) {
             lambda: backend.authApiFunction,
             policies: []
         },
-        // {
-        //     path: 'identity',
-        //     lambda: backend.identityApiFunction,
-        //     policies: [
-        //         {
-        //             actions: [
-        //                 'rekognition:DetectText',
-        //                 'rekognition:DetectFaces',
-        //                 'rekognition:CompareFaces',
-        //                 'rekognition:CreateFaceLivenessSession',
-        //                 'rekognition:GetFaceLivenessSessionResults'
-        //             ],
-        //             resources: ['*']
-        //         }
-        //     ]
-        // }
+        {
+            path: 'identity',
+            lambda: backend.identityApiFunction,
+            policies: [
+                {
+                    actions: [
+                        'rekognition:DetectText',
+                        'rekognition:DetectFaces',
+                        'rekognition:CompareFaces',
+                        'rekognition:CreateFaceLivenessSession',
+                        'rekognition:GetFaceLivenessSessionResults'
+                    ],
+                    resources: ['*']
+                }
+            ]
+        }
     ];
 
     lambdas.forEach((itemLambda) => {
@@ -81,7 +83,7 @@ export function configApi(backend: any) {
                 'arn:aws:secretsmanager:us-east-1:127214183584:secret:ct/dev/*',
             ]// Reemplaza con el ARN correcto del secreto
         }));
-        
+
         itemLambda.policies.forEach((policy) => {
             itemLambda.lambda.resources.lambda.addToRolePolicy(new PolicyStatement({
                 actions: policy.actions,

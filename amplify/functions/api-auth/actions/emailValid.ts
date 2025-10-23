@@ -13,12 +13,9 @@ const validCode = async (email: string, code: string) => {
     );
 
     if (!response.ok) {
-        const text = await response.text();
+        const text = await response.json();
         console.error("Fallo al validar código:", text);
-        return {
-            success: false,
-            details: text
-        }
+        return text
     }
 
     return {
@@ -39,13 +36,13 @@ export const emailValid = async (event: APIGatewayProxyEvent, pool: Pool, poolCT
 
         let emailDecoded = atob(email);
 
-        const { success, details } = await validCode(emailDecoded, code);
+        const { success, message } = await validCode(emailDecoded, code);
         if (!success) {
             return {
                 statusCode: 409,
                 body: JSON.stringify({
                     error: "Error al validar el código de verificación",
-                    details
+                    message
                 }),
             }
         }

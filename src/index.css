@@ -12,3 +12,16 @@
         margin-bottom: 30px;
     }
 }
+
+.amplify-liveness-hint,
+.amplify-liveness-recording-icon-container {
+    margin-top: -24px !important;
+}
+
+.amplify-liveness-camera-module {
+    border: 1px solid white !important;
+}
+
+:root {
+    --amplify-space-xl: 0rem !important;
+}

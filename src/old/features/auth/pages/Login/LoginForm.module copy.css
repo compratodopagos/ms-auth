@@ -1,0 +1,94 @@
+.grid {
+    grid-template-rows: 1fr auto;
+}
+
+.form {
+    max-width: 430px;
+}
+
+.links button.shadow-sm {
+    box-shadow: none;
+}
+
+.form button.bg-white {
+    color: #000000;
+}
+
+.form button.bg-gray-200 {
+    color: #717171;
+}
+
+.right {
+    display: none;
+}
+
+.block {
+    padding: 20px 0;
+}
+
+.copyRight {
+    align-items: flex-end;
+    color: #000000;
+    font-size: 14px;
+    margin-bottom: calc(var(--spacing)*4);
+}
+
+.info {
+    line-height: 1;
+    text-align: end;
+    padding: 0 20px;
+}
+
+.info .title {
+    font-size: 38px;
+}
+
+.info .title,
+.info p {
+    max-width: 315px;
+}
+
+.info .title {
+    font-size: 32px;
+}
+
+.info p {
+    font-size: 16px;
+    line-height: 20px;
+}
+
+@media (min-width: 768px) {
+    .right {
+        display: block;
+        min-height: 100vh;
+    }
+
+    .info .title,
+    .info p {
+        max-width: 500px;
+    }
+}
+
+@media (min-width: 992px) {
+
+    .right>div {
+        min-height: 100%;
+    }
+
+    .block {
+        padding: 62px 0;
+    }
+
+    .info .title {
+        font-size: 48px;
+    }
+
+    .info p {
+        font-size: 23px;
+        line-height: 28px;
+    }
+
+    .info {
+        padding: 0 62px;
+    }
+}

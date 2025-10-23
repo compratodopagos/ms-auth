@@ -1,0 +1,12 @@
+.inputCode {
+    border-color: #2B7EC1;
+    border-style: dashed;
+}
+
+.inputCode:focus {
+    box-shadow: 0px 0px 3px #2b7ec180;
+}
+
+.inputCode:disabled {
+    opacity: 0.3;
+}

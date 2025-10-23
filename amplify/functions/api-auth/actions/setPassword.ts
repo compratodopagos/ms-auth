@@ -1,6 +1,7 @@
 import { Pool } from "mysql2/promise";
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import bcrypt from "bcryptjs";
+import { getDefaultHeaders } from "../../resources/getDefaultHeaders";
 
 export const setPassword = async (event: APIGatewayProxyEvent, pool: Pool, poolCT: Pool): Promise<APIGatewayProxyResult> => {
     try {
@@ -21,8 +22,7 @@ export const setPassword = async (event: APIGatewayProxyEvent, pool: Pool, poolC
         }
 
         const emailDecoded = Buffer.from(email, "base64").toString("utf-8");
-        let hashed = await bcrypt.hash(password, 10);
-        hashed = hashed.replace(/^\$2b\$/, "$2y$");
+        const hashed = await hashPassword(password);
 
         // Guardar contraseña
         const [result] = await poolCT.query(
@@ -60,11 +60,26 @@ export const setPassword = async (event: APIGatewayProxyEvent, pool: Pool, poolC
             };
         }
 
-        const loginData = await response.json();
+        const { access_token, refresh_token } = await response.json();
+
+        const access_cookie = `access_token=${access_token}; Path=/; ${process.env.stageName == "local"
+            ? 'SameSite=None; Secure'
+            : 'Domain=.comprapagos.com; Secure; SameSite=Strict; Max-Age=604800'
+            }`;
+        const refresh_cookie = `refresh_token=${refresh_token}; Path=/; ${process.env.stageName == "local"
+            ? 'SameSite=None; Secure'
+            : 'Domain=.comprapagos.com; Secure; SameSite=Strict; Max-Age=604800'
+            }`;
 
         return {
             statusCode: 200,
-            body: JSON.stringify(loginData),
+            headers: {
+                ...getDefaultHeaders(event.headers.origin)
+            },
+            multiValueHeaders: {
+                'Set-Cookie': [access_cookie, refresh_cookie], // cookies separadas
+            },
+            body: JSON.stringify({ success: true }),
         };
     } catch (error) {
         console.error("Error en setPassword:", error);
@@ -77,3 +92,8 @@ export const setPassword = async (event: APIGatewayProxyEvent, pool: Pool, poolC
         };
     }
 };
+
+export async function hashPassword(password: string) {
+    const hashed = await bcrypt.hash(password, 12);
+    return hashed.replace(/^\$2[abxy]\$/, "$2y$");
+}

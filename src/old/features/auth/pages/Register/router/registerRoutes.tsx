@@ -1,0 +1,87 @@
+import { lazy } from "react";
+import { Navigate, RouteObject } from "react-router-dom";
+import RegisterEmailValidStep from "../RegisterEmailStep/RegisterEmailValidStep";
+import RegisterPasswordStep from "../RegisterPasswordStep/RegisterPasswordStep";
+import RegisterPhoneValidStep from "../RegisterPhoneStep/RegisterPhoneValidStep";
+import { RegisterValidFaceStep } from "../RegisterIdentityStep/RegisterValidFaceStep.module";
+
+const Register = lazy(() => import("../Register"));
+const RegisterTypeAccount = lazy(() => import("../RegisterTypeAccount/RegisterTypeAccount"));
+const RegisterTerms = lazy(() => import("../RegisterTerms/RegisterTerms"));
+const RegisterSteps = lazy(() => import("../RegisterSteps/RegisterSteps"));
+const RegisterEmailStep = lazy(() => import("../RegisterEmailStep/RegisterEmailStep"));
+const RegisterPhoneStep = lazy(() => import("../RegisterPhoneStep/RegisterPhoneStep"));
+const RegisterIdentityStep = lazy(() => import("../RegisterIdentityStep/RegisterIdentityStep"));
+
+export const registerRoutes: RouteObject[] = [
+  {
+    path: "",
+    element: (<Register />),
+    children: [
+      {
+        path: "",
+        element: (<RegisterTypeAccount />)
+      },
+      {
+        path: "terms",
+        element: (<RegisterTerms />)
+      },
+      {
+        path: "steps",
+        children: [
+          {
+            path: "",
+            element: (<RegisterSteps />)
+          },
+          {
+            path: "email",
+            children: [
+              {
+                path: "",
+                element: (<RegisterEmailStep />)
+              },
+              {
+                path: "valid",
+                element: (<RegisterEmailValidStep />)
+              }
+            ]
+          },
+          {
+            path: "password",
+            element: (<RegisterPasswordStep />)
+          },
+          {
+            path: "phone",
+            children: [
+              {
+                path: "",
+                element: (<RegisterPhoneStep/>)
+              },
+              {
+                path: "valid",
+                element: (<RegisterPhoneValidStep />)
+              }
+            ]
+          },
+          {
+            path: "identity",
+            children: [
+              {
+                path: "",
+                element: (<RegisterIdentityStep/>)
+              },
+              {
+                path: "valid",
+                element: (<RegisterValidFaceStep/>)
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    path: "*",
+    element: <Navigate to="/register" replace />,
+  },
+];
