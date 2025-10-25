@@ -33,6 +33,8 @@ export const statusSteps = async (
             user = rows[0];
         }
 
+        console.log('user',user)
+
         stepsStatus.email = !!user.email_verified_at;
         stepsStatus.password = !!user.password;
         stepsStatus.phone = !!user.phone_verified_at;

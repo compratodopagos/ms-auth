@@ -13,10 +13,10 @@ const sendCode = async (email: string): Promise<any> => {
     );
 
     console.log('payload',{
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email }),
-        })
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+    })
     console.log('response',response)
 
     if (!response.ok) {
@@ -97,6 +97,7 @@ export const setEmail = async (event: APIGatewayProxyEvent, pool: Pool, poolCT: 
             "INSERT INTO users (name, email, type_account, created_at, accepted_terms) VALUES ('prospect',?, ?, NOW(), 1)",
             [emailDecoded, type_account]
         );
+        
         const { success, details } = await sendCode(emailDecoded);
         if (!success) {
             return {

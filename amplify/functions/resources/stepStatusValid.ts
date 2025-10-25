@@ -1,6 +1,6 @@
 import { Pool } from 'mysql2/promise';
-import { companySteps } from '../../../src/ui/schemas';
-import { personalSteps } from '../../../src/ui/schemas';
+import { companySteps } from '../../../src/schemas/companySteps';
+import { personalSteps } from '../../../src/schemas/personalSteps';
 
 export const stepStatusValid = async (email:string, poolCT: Pool) => {
     const [rows] = await poolCT.query(

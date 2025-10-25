@@ -4,7 +4,7 @@ import '@compratodo/ui-components/dist/ui-components.css';
 import { createRoot } from 'react-dom/client'
 import { StrictMode } from 'react'
 
-import App from './ui/App'; 
+import App from './App'; 
 
 import { Amplify } from 'aws-amplify';
 import { parseAmplifyConfig } from "aws-amplify/utils";
