@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useRegisterTerms } from "../../../src/hooks";
 
-import { AccountType, DocumentPayload, RegisterStep } from "../../domain/types";
+import { AccountType, DocumentPayload, RegisterStep } from "@core/domain/types";
 import { setLoading, setSteps, setTypeAccount, setDocs } from "../../../src/store/registerSlice";
 
 import { UserController, LivenessController } from '../controllers'
 
-import { LivenessAmplifyRepository, UserAmplifyRepository } from "../../infrastructure/repositories";
+import { LivenessAmplifyRepository, UserAmplifyRepository } from "@core/infrastructure/repositories";
 import {
   GetSteps,
   SetEmail, ValidEmail,
@@ -18,7 +18,7 @@ import {
   SetDocument,
   StartLivenessSession,
   GetResultLivenessSession
-} from "../../application/usecases";
+} from "@core/application/useCases";
 
 import store from '../../../src/store';
 import { companySteps, personalSteps } from "../../../src/schemas";

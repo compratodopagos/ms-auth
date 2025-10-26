@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Login } from "../../application/usecases";
-import { AuthAmplifyRepository } from "../../infrastructure/repositories";
+import { Login } from "@core/application/useCases";
+import { AuthAmplifyRepository } from "@core/infrastructure/repositories";
 import { AuthController } from "../controllers";
 import { useNavigate } from "react-router-dom";
 

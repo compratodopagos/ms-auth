@@ -1,0 +1,16 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowAmplifyControlPlaneReadBootstrapVersion",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::073653171576:root"
+            },
+            "Action": [
+                "ssm:GetParameter"
+            ],
+            "Resource": "arn:aws:ssm:us-east-1:127214183584:parameter/cdk-bootstrap/hnb659fds/version"
+        }
+    ]
+}
