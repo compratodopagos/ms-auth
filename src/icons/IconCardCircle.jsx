@@ -1,10 +1,11 @@
 import './IconCardCircle.css';
 
 const IconCardCircle = ({
-    children
+    children,
+    styleIcon
 }) => {
     return (
-        <div className='flex justify-center items-center'>
+        <div className={`flex justify-center items-center ${styleIcon}`}>
             <div className="sect-icon rounded-full flex flex justify-center items-center">
                 {children}
             </div>

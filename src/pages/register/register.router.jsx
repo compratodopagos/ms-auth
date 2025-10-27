@@ -5,7 +5,7 @@ import { Navigate } from "react-router-dom";
 const Register = lazy(() => import("./Register"));
 const StepTypeAccount = lazy(() => import("./TypeAccount/TypeAccount.jsx"));
 const StepTerms = lazy(() => import("./Terms/Terms.jsx"));
-const Steps = lazy(() => import("./ViewSteps/Steps"));
+const Steps = lazy(() => import("./ViewSteps/Steps.jsx"));
 
 const Email = lazy(() => import("./ViewSteps/steps/Email/Email.jsx"));
 const EmailValid = lazy(() => import("./ViewSteps/steps/Email/EmailValid.jsx"));

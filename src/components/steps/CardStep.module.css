@@ -1,0 +1,33 @@
+.step {
+    display: flex;
+    justify-content: space-between;
+}
+
+.step label {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.step p {
+    font-size: 12px;
+    margin: 0;
+}
+
+.step>.flex:first-child>.flex {
+    margin-right: 15px;
+}
+
+@media (min-width: 768px) {
+    .step {
+        grid-template-columns: 1fr auto;
+    }
+}
+
+.IconCardCircle {
+    margin-right: 15px;
+}
+
+.IconCardCircle .sect-icon {
+    width: 52.25px;
+    height: 52.25px;
+}

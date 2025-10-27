@@ -1,0 +1,27 @@
+@media (max-width: 768px) {
+    .card {
+        border: 0;
+        padding: 0;
+        background: none;
+    }
+}
+
+/* desktop */
+.container.steps {
+    width: 100%;
+    max-width: 1200px;
+}
+
+.container.steps label {
+    color: #000000;
+}
+
+.container.steps p {
+    color: #565656;
+}
+
+@media (min-width: 768px) {
+    .card {
+        padding: 30px;
+    }
+}

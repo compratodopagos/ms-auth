@@ -7,7 +7,7 @@ const RegisterPage = () => {
   return (
     <div className={`${styles.RegisterLayout} p-4`}>
       <Navbar />
-      <main className="flex-1 flex flex-col items-center justify-center px-6 py-10">
+      <main className="flex-1 flex flex-col items-center justify-center md:px-6 py-10">
         <Outlet />
       </main>
       <Footer />

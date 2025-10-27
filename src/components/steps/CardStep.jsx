@@ -1,3 +1,4 @@
+import styles from './CardStep.module.css';
 import { useCallback, useMemo } from "react";
 import { Card, Button, Tooltip } from "@compratodo/ui-components";
 import IconCardCircle from "../../icons/IconCardCircle";
@@ -66,9 +67,9 @@ const CardStep = ({
     );
 
     return (
-        <Card title="" className="grid-2 step mb-2" key={step.id ?? idx}>
-            <div className="flex">
-                <IconCardCircle>{renderIcon(step.id)}</IconCardCircle>
+        <Card title="" className={`grid-1 md:grid-2 ${styles.step} mb-2`} key={step.id ?? idx}>
+            <div className="flex md:items-center">
+                <IconCardCircle styleIcon={styles.IconCardCircle}>{renderIcon(step.id)}</IconCardCircle>
 
                 <div className="text-left">
                     <label>{step.title}</label>
@@ -80,7 +81,7 @@ const CardStep = ({
                 {
                     step.completed ?
                         <Tooltip title="Completado" content="Completado">
-                            <CheckCircle color="var(--color-accent)" stroke="var(--color-primary)" className="w-8" />
+                            <CheckCircle color="var(--color-accent)" stroke="var(--color-primary)" className="w-7" />
                         </Tooltip>
                         :
                         <Button
@@ -93,8 +94,8 @@ const CardStep = ({
                             className='container'
                         >
                             <div className="flex items-center justify-center m-0">
-                                <b className="mr-1">Agregar</b>
-                                <PlusCircle width={18} />
+                                <b className="mr-1 text-sm">Agregar</b>
+                                <PlusCircle width={14} />
                             </div>
                         </Button>
                 }
