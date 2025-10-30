@@ -1,5 +1,5 @@
 export type StatusStepsType = {
-    type_account: string;
+    type_account?: string;
     docs?: any;
     stepsStatus: Record<string, boolean>;
 };

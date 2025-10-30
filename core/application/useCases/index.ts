@@ -8,7 +8,10 @@ export * from './user/SetPassword';
 export * from './user/SetPhone';
 export * from './user/ValidPhone';
 export * from './user/SetDocument';
+
 export * from './steps/GetSteps';
+export * from './steps/GetRegulatory';
+export * from './steps/SetCountry';
 
 export * from './liveness/GetResultLivenessSession';
 export * from './liveness/StartLivenessSession';

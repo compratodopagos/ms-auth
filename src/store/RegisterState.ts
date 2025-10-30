@@ -1,5 +1,5 @@
-import { TermData } from "../types";
-import { RegisterStep } from "../types/RegisterStep";
+import { TermData } from "@core/domain/types";
+import { RegisterStep } from "@core/domain/types";
 
 export interface RegisterState {
   phone?: string;
@@ -14,4 +14,5 @@ export interface RegisterState {
   acceptDataManagement?:TermData;
   acceptUserConditions?:TermData;
   steps: RegisterStep[];
+  regulatory: RegisterStep[];
 }

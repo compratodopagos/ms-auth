@@ -33,7 +33,7 @@ export const personalSteps: RegisterStep[] = [
     id: "regulatory",
     title: "Completa los datos regulatorios",
     description: "Cumple con las normas vigentes en Colombia",
-    path: '/register/steps/regulatory',
+    path: '/register/regulatory',
     completed: false
   }
 ];

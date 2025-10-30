@@ -27,6 +27,10 @@ export class UserAmplifyRepository implements UserRepository {
         return { type_account, stepsStatus, docs };
     }
 
+    async getRegulatory() {
+        return await apiService.get('auth/regulatory');
+    }
+
     async setPassword(password:string, confirm_password:string) {
         return await apiService.post('auth/password', { password, confirm_password });
     }
@@ -41,6 +45,10 @@ export class UserAmplifyRepository implements UserRepository {
 
     async setDocument(payload: DocumentPayload) {
         return await await apiService.post("identity/storeFile", payload);
+    }
+
+    async setCountry(country:string) {
+        return await apiService.post('auth/country', { country });
     }
 
 }

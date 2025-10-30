@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RegisterState } from './RegisterState';
-import { RegisterStep, Terms } from '../../domain/types';
+import { RegisterStep, Terms } from '@core/domain/types';
 
 const initialState: RegisterState = {
   loading: false,
   isLogged: false,
   steps: [],
+  regulatory: []
 };
 
 const registerSlice = createSlice({
@@ -23,6 +24,10 @@ const registerSlice = createSlice({
     setSteps: (state, { payload: steps }: PayloadAction<RegisterStep[]>) => ({
       ...state,
       steps
+    }),
+    setRegulatory: (state, { payload: steps }: PayloadAction<RegisterStep[]>) => ({
+      ...state,
+      regulatory: steps
     }),
     setTerms: (state, { payload: terms }: PayloadAction<Terms>) => ({
       ...state,
@@ -45,6 +50,7 @@ export const {
   setDocs,
   setLoading,
   setIsLogged,
+  setRegulatory,
   setTypeAccount,
   setStepCompleted,
 } = registerSlice.actions;

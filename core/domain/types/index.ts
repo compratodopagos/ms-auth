@@ -7,3 +7,4 @@ export * from './Step';
 export * from './ItemPasswordValid';
 export * from './Terms';
 export * from '../../../amplify/constants/RegisterStep'
+export * from './TermData';

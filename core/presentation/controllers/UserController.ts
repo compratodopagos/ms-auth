@@ -1,14 +1,16 @@
 import {
   GetSteps,
+  GetRegulatory,
   SetAccount,
   SetEmail, ValidEmail,
   SetPassword,
   SetPhone, ValidPhone,
-  SetDocument
-} from "../../application/usecases";
+  SetDocument,
+  SetCountry
+} from "../../application/useCases";
 import { AccountType, DocumentPayload, StatusStepsType } from "../../domain/types";
 
-type Command = GetSteps | SetAccount | SetEmail | ValidEmail | SetPassword | SetPhone | ValidPhone | SetDocument;
+type Command = GetSteps | SetCountry | GetRegulatory | SetAccount | SetEmail | ValidEmail | SetPassword | SetPhone | ValidPhone | SetDocument;
 
 export class UserController {
   constructor(private commandUser: Command) { }
@@ -21,6 +23,14 @@ export class UserController {
     }
   }
 
+  async getRegulatory() {
+    try {
+      return await (this.commandUser as GetRegulatory).execute();
+    } catch (error) {
+      return ({} as StatusStepsType);
+    }
+  }
+
   async setAccount(type: AccountType) {
     try {
       return await (this.commandUser as SetAccount).execute(type);
@@ -29,7 +39,7 @@ export class UserController {
     }
   }
 
-  async setEmail(email:string, type_account?:string) {
+  async setEmail(email: string, type_account?: string) {
     try {
       return await (this.commandUser as SetEmail).execute(email, type_account);
     } catch (error) {
@@ -37,7 +47,7 @@ export class UserController {
     }
   }
 
-  async validEmailCode(code:string) {
+  async validEmailCode(code: string) {
     try {
       return await (this.commandUser as ValidEmail).execute(code);
     } catch (error) {
@@ -45,7 +55,7 @@ export class UserController {
     }
   }
 
-  async setPassword(password:string, confirm_password:string) {
+  async setPassword(password: string, confirm_password: string) {
     try {
       return await (this.commandUser as SetPassword).execute(password, confirm_password);
     } catch (error) {
@@ -53,7 +63,7 @@ export class UserController {
     }
   }
 
-  async setPhone(phone?: string) { 
+  async setPhone(phone?: string) {
     try {
       return await (this.commandUser as SetPhone).execute(phone);
     } catch (error) {
@@ -61,7 +71,7 @@ export class UserController {
     }
   }
 
-  async validPhoneCode(code:string) {
+  async validPhoneCode(code: string) {
     try {
       return await (this.commandUser as ValidPhone).execute(code);
     } catch (error) {

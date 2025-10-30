@@ -8,3 +8,7 @@ export * from './BackDoc';
 export * from './Upload';
 export * from './FileEdit';
 export * from './FaceValid'
+export * from './Folder'
+export * from './Law'
+export * from './Terms'
+export * from './Search'

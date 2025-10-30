@@ -4,6 +4,7 @@ import { AccountType, ApiResponse, DocumentApiResponse, DocumentPayload, StatusS
 export interface UserRepository {
   getUser(): Promise<User>;
   getSteps(): Promise<StatusStepsType>;
+  getRegulatory(): Promise<StatusStepsType>;
   setEmail(email: string, type_account?:string): Promise<ApiResponse>;
   setAccount(type: AccountType): Promise<User>;
   validEmail(code: string): Promise<ApiResponse>;
@@ -11,4 +12,5 @@ export interface UserRepository {
   setPhone(phone?: string): Promise<ApiResponse>;
   validPhone(code: string): Promise<ApiResponse>;
   setDocument(payload: DocumentPayload): Promise<DocumentApiResponse>;
+  setCountry(country:string): Promise<ApiResponse>;
 }

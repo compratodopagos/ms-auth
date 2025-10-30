@@ -10,13 +10,17 @@ const Steps = lazy(() => import("./ViewSteps/Steps.jsx"));
 const Email = lazy(() => import("./ViewSteps/steps/Email/Email.jsx"));
 const EmailValid = lazy(() => import("./ViewSteps/steps/Email/EmailValid.jsx"));
 
-import PasswordStep from "./ViewSteps/steps/PasswordStep/PasswordStep.jsx";
+const PasswordStep = lazy(() => import("./ViewSteps/steps/PasswordStep/PasswordStep.jsx"));
 
 const PhoneStep = lazy(() => import("./ViewSteps/steps/PhoneStep/PhoneStep.jsx"));
 const PhoneValidStep = lazy(() => import("./ViewSteps/steps/PhoneStep/PhoneValidStep.jsx"));
 
 const IdentityStep = lazy(() => import("./ViewSteps/steps/IdentityStep/IdentityStep.jsx"));
 const ValidFaceStep = lazy(() => import("./ViewSteps/steps/IdentityStep/ValidFaceStep.jsx"));
+
+const Regulatory = lazy(() => import("./ViewRegulatory/Regulatory.jsx"));
+const Address = lazy(() => import("./ViewRegulatory/steps/Address.jsx"));
+const Country = lazy(() => import("./ViewRegulatory/steps/Country.jsx"));
 
 const registerRoutes = [
   {
@@ -80,6 +84,20 @@ const registerRoutes = [
                 element: (<ValidFaceStep />)
               }
             ]
+          }
+        ]
+      },
+      {
+        path: "regulatory",
+        element: (<Regulatory />),
+        children: [
+          {
+            path: "",
+            element: (<Country/>)
+          },
+          {
+            path: "residence",
+            element: (<Address/>)
           }
         ]
       }

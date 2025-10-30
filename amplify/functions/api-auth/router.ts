@@ -11,6 +11,7 @@ import { setCookies } from './actions/setCookies';
 import { setUser } from './actions/setUser';
 import { phoneValid } from './actions/phoneValid';
 import { login } from './actions/login';
+import { statusRegulatory } from './actions/statusRegulatory';
 
 export const routes: Record<string, (event: APIGatewayProxyEvent, pool: Pool, poolCT: Pool, user:any) => Promise<any>> = {
     "GET:/auth/user": getUser,
@@ -18,6 +19,7 @@ export const routes: Record<string, (event: APIGatewayProxyEvent, pool: Pool, po
     "POST:/auth/user": setUser,
     "POST:/auth/cookies": setCookies,
     "GET:/auth/steps": statusSteps,
+    "GET:/auth/regulatory": statusRegulatory,
     "POST:/auth/email": setEmail,
     "POST:/auth/phone": setPhone,
     "POST:/auth/password": setPassword,
