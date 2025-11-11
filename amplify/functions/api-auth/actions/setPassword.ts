@@ -39,7 +39,7 @@ export const setPassword = async (event: APIGatewayProxyEvent, pool: Pool, poolC
 
         // Hacer login automático contra Laravel API
         const API_URL = process.env.API_URL;
-        const response = await fetch(`${API_URL}/public/auth/login`, {
+        const response = await fetch(`${API_URL}/auth/login`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

@@ -4,7 +4,7 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 const sendCode = async (email: string): Promise<any> => {
     const API_URL = process.env.API_URL;
     const response = await fetch(
-        `${API_URL}/public/auth/verify/email/send`,
+        `${API_URL}/auth/verify/email/send`,
         {
             method: "POST",
             headers: { "Content-Type": "application/json" },
