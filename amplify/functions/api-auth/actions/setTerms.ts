@@ -1,14 +1,14 @@
 import { Pool } from "mysql2/promise";
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 
-export const setCountry = async (
+export const setTerms = async (
     event: APIGatewayProxyEvent,
     pool: Pool,
     poolCT: Pool,
     user: any
 ): Promise<APIGatewayProxyResult> => {
     try {
-        const { country } = JSON.parse(event.body || '{}');
+        const { tyc } = JSON.parse(event.body || '{}');
 
         if (!user) {
             return {
@@ -17,12 +17,12 @@ export const setCountry = async (
             };
         }
 
-        const [basicDataExists]: any = await pool.query(`SELECT id, country, ocupation, income_statement, PEP, tyc FROM basic_data WHERE user_id = ?`, [user.id]);
+        const [basicDataExists]: any = await pool.query(`SELECT id FROM basic_data WHERE user_id = ?`, [user.id]);
 
         if (basicDataExists[0]) {
             const [result] = await pool.query(
-                "UPDATE basic_data SET country = ? WHERE id = ?",
-                [country, basicDataExists[0].id]
+                "UPDATE basic_data SET tyc = ? WHERE id = ?",
+                [tyc, basicDataExists[0].id]
             );
             if ((result as any).affectedRows === 0) {
                 return {
@@ -32,8 +32,8 @@ export const setCountry = async (
             }
         } else {
             const [result] = await pool.query(
-                "INSERT INTO basic_data (country, user_id) VALUES (?, ?)",
-                [country, user.id]
+                "INSERT INTO basic_data (tyc, user_id) VALUES (?, ?)",
+                [tyc, user.id]
             );
         }
 
@@ -41,7 +41,7 @@ export const setCountry = async (
             statusCode: 200,
             body: JSON.stringify({
                 success: true,
-                message: "País actualizado correctamente"
+                message: "Términos actualizado correctamente"
             }),
         };
     } catch (error) {

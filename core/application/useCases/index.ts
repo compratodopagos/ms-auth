@@ -12,6 +12,10 @@ export * from './user/SetDocument';
 export * from './steps/GetSteps';
 export * from './steps/GetRegulatory';
 export * from './steps/SetCountry';
+export * from './steps/SetAddress';
+export * from './steps/SetOcupation';
+export * from './steps/SetStatement';
+export * from './steps/SetTerms';
 
 export * from './liveness/GetResultLivenessSession';
 export * from './liveness/StartLivenessSession';

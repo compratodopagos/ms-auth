@@ -1,5 +1,7 @@
 export * from './loginSchema';
 export * from './emailSchema';
+export * from './emailSchema';
+export * from './ocupationSchema';
 export * from '../../amplify/constants/personalSteps';
 export * from '../../amplify/constants/regulatorySteps';
 export * from '../../amplify/constants/companySteps';

@@ -13,4 +13,8 @@ export interface UserRepository {
   validPhone(code: string): Promise<ApiResponse>;
   setDocument(payload: DocumentPayload): Promise<DocumentApiResponse>;
   setCountry(country:string): Promise<ApiResponse>;
+  setAddress(address:any): Promise<ApiResponse>;
+  setOcupation(ocupation:string): Promise<ApiResponse>;
+  setStatement(statement:any): Promise<ApiResponse>;
+  setTerms(tyc:boolean): Promise<ApiResponse>;
 }

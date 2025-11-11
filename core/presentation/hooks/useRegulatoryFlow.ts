@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { RegisterStep } from "@core/domain/types";
@@ -9,7 +9,11 @@ import { UserController } from '../controllers'
 import { UserAmplifyRepository } from "@core/infrastructure/repositories";
 import {
   GetRegulatory,
-  SetCountry
+  SetCountry,
+  SetAddress,
+  SetOcupation,
+  SetStatement,
+  SetTerms
 } from "@core/application/useCases";
 
 import store from '../../../src/store';
@@ -28,44 +32,73 @@ export function useRegulatoryFlow(refreshSteps = false) {
     loading
   } = useSelector((state: RootState) => state.register);
 
-  const validSteps = useCallback(async () => {
-    const command = new GetRegulatory(userRepo);
-    const controller = new UserController(command);
-    const { stepsStatus } = await controller.getRegulatory();
-    const stepsCalc: RegisterStep[] = regulatorySteps;
-
-    const updated = stepsCalc.map(step => ({
-      ...step,
-      completed: stepsStatus[step.id]
-    }));
-    console.log(updated)
-
-    dispatch(setRegulatory(updated));
-
-    return updated;
-  }, [dispatch]);
-
   useEffect(() => {
     const init = async () => {
       dispatch(setLoading(true));
 
-      let updatedSteps = regulatory;
-      if (regulatory.length == 0 || refreshSteps){
-        updatedSteps = await validSteps();
-      }
+      const command = new GetRegulatory(userRepo);
+      const controller = new UserController(command);
+      const { stepsStatus } = await controller.getRegulatory();
+      const stepsCalc: RegisterStep[] = regulatorySteps;
 
+      const updated = stepsCalc.map(step => ({
+        ...step,
+        completed: stepsStatus[step.id]
+      }));
+
+      dispatch(setRegulatory(updated));
       dispatch(setLoading(false));
     };
 
-    if (!loading) init();
-  }, [refreshSteps, validSteps]);
+    if (!loading && regulatory.length === 0) init();
+    console.log('effect refreshSteps y validSteps', refreshSteps)
+  }, [refreshSteps]);
 
   const setCountry = async (country: string) => {
     const command = new SetCountry(userRepo);
-    const controller = new UserController(command);
-    const { success, message } = await controller.setEmail(country) || {};
+    const { success, message } = await command.execute(country) || {};
     if (success) {
       navigate('/register/regulatory/residence');
+    } else {
+      return message;
+    }
+  }
+
+  const setAddress = async (address: any) => {
+    const command = new SetAddress(userRepo);
+    const { success, message } = await command.execute(address);
+    if (success) {
+      navigate('/register/regulatory/ocupation');
+    } else {
+      return message;
+    }
+  }
+
+  const setOcupation = async (ocupation: any) => {
+    const command = new SetOcupation(userRepo);
+    const { success, message } = await command.execute(ocupation);
+    if (success) {
+      navigate('/register/regulatory/statement');
+    } else {
+      return message;
+    }
+  }
+
+  const setStatement = async (statement: any) => {
+    const command = new SetStatement(userRepo);
+    const { success, message } = await command.execute(statement);
+    if (success) {
+      navigate('/register/regulatory/tyc');
+    } else {
+      return message;
+    }
+  }
+
+  const setTerms = async (tyc: boolean) => {
+    const command = new SetTerms(userRepo);
+    const { success, message } = await command.execute(tyc);
+    if (success) {
+      navigate('/register/completed');
     } else {
       return message;
     }
@@ -74,8 +107,11 @@ export function useRegulatoryFlow(refreshSteps = false) {
   return {
     regulatory,
     setCountry,
+    setAddress,
+    setOcupation,
+    setStatement,
+    setTerms,
     loading,
     setLoading
   };
-
 }

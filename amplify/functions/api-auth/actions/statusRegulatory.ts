@@ -22,16 +22,23 @@ export const statusRegulatory = async (
 
         const queryString = `SELECT department, city, type_road, name_road, number, details, postal_code FROM address WHERE user_id = ?`;
         const [addressExists]:any = await pool.execute(queryString, [user?.id]);
-        stepsStatus.residence = !!addressExists[0];
+        stepsStatus.residence = addressExists[0];
 
         const [basicDataExists]:any = await pool.query(`SELECT country, ocupation, income_statement, PEP, tyc FROM basic_data WHERE user_id = ?`, [user.id]);
-        stepsStatus.country = basicDataExists[0]?.country;
-        stepsStatus.ocupation = basicDataExists[0]?.ocupation;
-        stepsStatus.statement = basicDataExists[0]?.income_statement;
-        stepsStatus.terms = !!basicDataExists[0]?.PEP || !!basicDataExists[0]?.tyc;
-
-        /*
-        */
+        const {
+            country,
+            ocupation,
+            income_statement,
+            PEP,
+            tyc
+        } = basicDataExists[0] || {};
+        stepsStatus.country = country;
+        stepsStatus.ocupation = ocupation;
+        stepsStatus.statement = income_statement ? {
+            income_statement,
+            PEP
+        } : undefined;
+        stepsStatus.terms = !!PEP || !!tyc;
 
         return {
             statusCode: 200,

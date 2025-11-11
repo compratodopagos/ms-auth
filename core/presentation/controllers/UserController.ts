@@ -6,11 +6,12 @@ import {
   SetPassword,
   SetPhone, ValidPhone,
   SetDocument,
-  SetCountry
+  SetCountry,
+  SetAddress
 } from "../../application/useCases";
 import { AccountType, DocumentPayload, StatusStepsType } from "../../domain/types";
 
-type Command = GetSteps | SetCountry | GetRegulatory | SetAccount | SetEmail | ValidEmail | SetPassword | SetPhone | ValidPhone | SetDocument;
+type Command = GetSteps | SetCountry | GetRegulatory | SetAccount | SetEmail | ValidEmail | SetPassword | SetPhone | ValidPhone | SetDocument | SetAddress;
 
 export class UserController {
   constructor(private commandUser: Command) { }

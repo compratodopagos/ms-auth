@@ -1,7 +1,6 @@
 import { lazy } from "react";
 import { Navigate } from "react-router-dom";
 
-
 const Register = lazy(() => import("./Register"));
 const StepTypeAccount = lazy(() => import("./TypeAccount/TypeAccount.jsx"));
 const StepTerms = lazy(() => import("./Terms/Terms.jsx"));
@@ -21,6 +20,10 @@ const ValidFaceStep = lazy(() => import("./ViewSteps/steps/IdentityStep/ValidFac
 const Regulatory = lazy(() => import("./ViewRegulatory/Regulatory.jsx"));
 const Address = lazy(() => import("./ViewRegulatory/steps/Address.jsx"));
 const Country = lazy(() => import("./ViewRegulatory/steps/Country.jsx"));
+const Ocupation = lazy(() => import("./ViewRegulatory/steps/Ocupation.jsx"));
+const Statement = lazy(() => import("./ViewRegulatory/steps/Statement.jsx"));
+const Terms = lazy(() => import("./ViewRegulatory/steps/Terms.jsx"));
+const Completed = lazy(() => import("./Completed.jsx"));
 
 const registerRoutes = [
   {
@@ -46,7 +49,7 @@ const registerRoutes = [
             path: "email",
             children: [
               {
-                path: "",
+                index: true,
                 element: (<Email />)
               },
               {
@@ -92,14 +95,30 @@ const registerRoutes = [
         element: (<Regulatory />),
         children: [
           {
-            path: "",
+            index: true,
             element: (<Country/>)
           },
           {
             path: "residence",
             element: (<Address/>)
+          },
+          {
+            path: "ocupation",
+            element: (<Ocupation/>)
+          },
+          {
+            path: "statement",
+            element: (<Statement/>)
+          },
+          {
+            path: "terms",
+            element: (<Terms/>)
           }
         ]
+      },
+      {
+        path: "completed",
+        element: (<Completed/>)
       }
     ]
   },

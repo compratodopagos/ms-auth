@@ -11,7 +11,12 @@ import { setCookies } from './actions/setCookies';
 import { setUser } from './actions/setUser';
 import { phoneValid } from './actions/phoneValid';
 import { login } from './actions/login';
+import { setCountry } from './actions/setCountry';
 import { statusRegulatory } from './actions/statusRegulatory';
+import { setAddress } from './actions/setAddress';
+import { setOcupation } from './actions/setOcupation';
+import { setStatement } from './actions/setStatement';
+import { setTerms } from './actions/setTerms';
 
 export const routes: Record<string, (event: APIGatewayProxyEvent, pool: Pool, poolCT: Pool, user:any) => Promise<any>> = {
     "GET:/auth/user": getUser,
@@ -19,10 +24,16 @@ export const routes: Record<string, (event: APIGatewayProxyEvent, pool: Pool, po
     "POST:/auth/user": setUser,
     "POST:/auth/cookies": setCookies,
     "GET:/auth/steps": statusSteps,
-    "GET:/auth/regulatory": statusRegulatory,
     "POST:/auth/email": setEmail,
     "POST:/auth/phone": setPhone,
     "POST:/auth/password": setPassword,
     "POST:/auth/email/valid": emailValid,
     "POST:/auth/phone/valid": phoneValid,
+
+    "GET:/auth/regulatory": statusRegulatory,
+    "POST:/auth/country": setCountry,
+    "POST:/auth/address": setAddress,
+    "POST:/auth/ocupation": setOcupation,
+    "POST:/auth/statement": setStatement,
+    "POST:/auth/terms": setTerms,
 };

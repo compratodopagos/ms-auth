@@ -1,5 +1,5 @@
 import { UserRepository } from "../../domain/repositories/UserRepository";
-import { AccountType, DocumentPayload } from "../../domain/types";
+import { AccountType, ApiResponse, DocumentPayload } from "../../domain/types";
 import { apiService } from "../api/api.service";
 
 export class UserAmplifyRepository implements UserRepository {
@@ -49,6 +49,22 @@ export class UserAmplifyRepository implements UserRepository {
 
     async setCountry(country:string) {
         return await apiService.post('auth/country', { country });
+    }
+
+    async setAddress(payload: any): Promise<ApiResponse> {
+        return await apiService.post('/auth/address', payload);
+    }
+
+    async setOcupation(ocupation:string) {
+        return await apiService.post('auth/ocupation', { ocupation });
+    }
+
+    async setStatement(payload:any) {
+        return await apiService.post('auth/statement', payload);
+    }
+
+    async setTerms(tyc:boolean) {
+        return await apiService.post('auth/terms', { tyc });
     }
 
 }

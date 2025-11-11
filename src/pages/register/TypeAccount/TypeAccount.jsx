@@ -13,19 +13,21 @@ const RegisterTypeAccount = () => {
                 </div>
             </div>
             <div className="grid-2">
-                <InfoCard   
-                    icon={<WalletBold />}
+                <InfoCard
+                    icon={<WalletBold className='w-11' />}
                     title="Cuenta Personal"
                     description="Necesitas tener tu Cédula contigo para crear una cuenta personal."
                     buttonText="Crear cuenta personal"
                     buttonOnClick={async () => await setAccount('personal')}
+                    sectIcon="w-18 h-18"
                 />
                 <InfoCard
-                    icon={<BusinnessBold />}
+                    icon={<BusinnessBold className='w-11' />}
                     title="Cuenta para empresa"
                     description="Necesitas tener el NIT,  tu documento Y SER EL REPRESENTANTE LEGAL."
                     buttonText="Crear cuenta empresa"
                     buttonOnClick={async () => await setAccount('business')}
+                    sectIcon="w-18 h-18"
                 />
             </div>
         </div>

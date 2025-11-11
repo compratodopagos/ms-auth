@@ -1,7 +1,6 @@
 import { RegisterStep } from "./RegisterStep";
 
 export const regulatorySteps: RegisterStep[] = [
-  
   {
     id: "country",
     title: "País",
@@ -20,21 +19,21 @@ export const regulatorySteps: RegisterStep[] = [
     id: "ocupation",
     title: "Ocupación",
     description: "¿A qué te dedicas?",
-    path: '/register/regulatory/phone',
+    path: '/register/regulatory/ocupation',
     completed: false
   },
   {
     id: "statement",
     title: "Declaración",
-    description: "Declaración de ingresos",
-    path: '/register/regulatory/identity',
+    description: "",
+    path: '/register/regulatory/statement',
     completed: false
   },
   {
     id: "terms",
     title: "Términos",
     description: "Para continuar, debes aceptar los Términos y Condiciones",
-    path: '/register/regulatory/regulatory',
+    path: '/register/regulatory/terms',
     completed: false
   }
 ];

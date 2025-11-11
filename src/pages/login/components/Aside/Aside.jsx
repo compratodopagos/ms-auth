@@ -1,4 +1,5 @@
 import styles from './Aside.module.css'
+import { LogoIcon } from '../../../../icons/LogoIcon'
 
 export const Aside = () => {
     return (
@@ -6,7 +7,7 @@ export const Aside = () => {
             <div className={`${styles.block} bg-primary rounded-lg`}>
                 <div className={`${styles.info}`}>
                     <div className="flex justify-end">
-                        <img src="/images/logo.png" width={283} />
+                        <LogoIcon className='w-[283px]'/>
                     </div>
                     <div className="mt-4 flex flex-wrap justify-end">
                         <label className={`title text-white mb-4`}>La forma más segura y rápida de gestionar tus pagos</label>

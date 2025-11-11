@@ -7,12 +7,13 @@ const InfoCard = ({
     icon,
     buttonVariant = 'primary',
     buttonText,
-    buttonOnClick
+    buttonOnClick,
+    sectIcon
 }) => {
     return (
         <Card title="" border={false} className='flex justify-center items-center'>
             <div style={{ maxWidth: '300px' }}>
-                <IconCardCircle>{icon}</IconCardCircle>
+                <IconCardCircle sectIcon={sectIcon}>{icon}</IconCardCircle>
                 <div className="mt-4 mb-4">
                     <h4>{title}</h4>
                     <p>{description}</p>

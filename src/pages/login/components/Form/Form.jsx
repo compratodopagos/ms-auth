@@ -4,6 +4,7 @@ import { FormBuilder } from '@compratodo/ui-components';
 import { useNavigate } from 'react-router-dom';
 import { loginSchema } from '../../../../schemas';
 import { useAuthController } from '../../../../../core/presentation/hooks';
+import { GiftIcon } from '../../../../icons/GiftIcon';
 
 export const SectForm = () => {
     const { loading, error, login } = useAuthController();
@@ -14,7 +15,7 @@ export const SectForm = () => {
             <div className="flex justify-center items-center">
                 <div className={`${styles.form} text-center container p-4`}>
                     <div className="w-100 flex justify-center">
-                        <img src="/images/icons/gift.png" width={60} />
+                        <GiftIcon className='w-15'/>
                     </div>
                     <h1>Bienvenido de nuevo</h1>
                     <div>

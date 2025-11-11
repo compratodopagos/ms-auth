@@ -1,60 +1,72 @@
 import styles from "./Country.module.css";
 import { useEffect, useState } from "react";
-import { countrySchema } from "../../../../schemas";
+import { ocupationSchema } from "../../../../schemas";
 import { Search } from "../../../../icons";
-import { COUNTRIES } from '../../../../../core/constants/COUNTRIES';
 import { FormBuilder } from "@compratodo/ui-components";
 
-export const Country = ({
+const OCUPATIONS = [
+    'Trabajo con salario fijo',
+    'Independiente',
+    'Soy estudiante',
+    'Estoy pensionado/a',
+    'Vivo de ingresos por capital',
+    'Ama/o de casa',
+    'Actualmente no tengo empleo'
+];
+
+export const Ocupation = ({
     regulatoryFlow
 }) => {
     const {
         error,
         setError,
         regulatory,
-        setCountry,
+        setOcupation,
         loading,
         setLoading
     } = regulatoryFlow;
 
-    const [schema, setSchema] = useState(() => ({ ...countrySchema }));
+    const [schema, setSchema] = useState(() => ({ ...ocupationSchema }));
 
     useEffect(() => {
-        const value = regulatory.find(r => r.id == 'country')?.completed;
+        const value = regulatory.find(r => r.id == 'ocupation')?.completed;
         setSchema(prev => ({
             ...prev,
-            country: {
-                ...prev.country,
-                value
+            ocupation: {
+                ...prev.ocupation,
+                value,
+                options: OCUPATIONS.map(ocupation => ({
+                    value: ocupation,
+                    label: ocupation
+                }))
             }
         }));
     }, [regulatory])
 
-    const handleSubmit = async ({ country }) => {
+    const handleSubmit = async ({ ocupation }) => {
         setLoading(true);
-        const errorMsg = await setCountry(country);
+        const errorMsg = await setOcupation(ocupation);
         if (errorMsg) {
             setError(errorMsg);
             return;
         }
-        
     };
 
     const search = ({ target }) => {
         const { value } = target;
-        const newCountries = value.length > 0
-            ? COUNTRIES.filter(c =>
-                c.name.toLowerCase().includes(value.toLowerCase())
+        const newOptions = value.length > 0
+            ? OCUPATIONS.filter(c =>
+                c.toLowerCase().includes(value.toLowerCase())
             )
-            : COUNTRIES;
+            : OCUPATIONS;
 
         setSchema(prev => ({
             ...prev,
-            country: {
+            ocupation: {
                 ...prev.country,
-                options: newCountries.map(c => ({
-                    value: c.name,
-                    label: c.name
+                options: newOptions.map(ocupation => ({
+                    value: ocupation,
+                    label: ocupation
                 }))
             }
         }));
