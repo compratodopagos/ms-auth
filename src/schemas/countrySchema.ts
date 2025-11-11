@@ -1,4 +1,4 @@
-import { COUNTRIES } from "@core/constants/countries";
+import { COUNTRIES } from "@core/constants/COUNTRIES";
 
 export const countrySchema = {
     country: {
