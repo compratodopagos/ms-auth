@@ -17,4 +17,5 @@ export interface UserRepository {
   setOcupation(ocupation:string): Promise<ApiResponse>;
   setStatement(statement:any): Promise<ApiResponse>;
   setTerms(tyc:boolean): Promise<ApiResponse>;
+  setNit(nit:string): Promise<ApiResponse>;
 }

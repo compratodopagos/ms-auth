@@ -11,10 +11,13 @@ import { UserController, LivenessController } from '../controllers'
 
 import { LivenessAmplifyRepository, UserAmplifyRepository } from "@core/infrastructure/repositories";
 import {
+  SetNit,
   GetSteps,
-  SetEmail, ValidEmail,
+  SetEmail,
+  ValidEmail,
   SetPassword,
-  SetPhone, ValidPhone,
+  SetPhone,
+  ValidPhone,
   SetDocument,
   StartLivenessSession,
   GetResultLivenessSession
@@ -185,6 +188,17 @@ export function useRegisterFlow(refreshSteps = false) {
     }
   }
 
+  const setNit = async (nit: string) => {
+    const command = new SetNit(userRepo);
+    const controller = new UserController(command);
+    const { success, message } = await controller.setNit(nit);
+    if (success) {
+      navigate('/register/steps/company/data');
+    } else {
+      return message;
+    }
+  }
+
   const startLivenessSession = async () => {
     const livenessRepo = new LivenessAmplifyRepository();
     const command = new StartLivenessSession(livenessRepo);
@@ -202,6 +216,7 @@ export function useRegisterFlow(refreshSteps = false) {
   return {
     docs,
     steps,
+    setNit,
     getEmail,
     setEmail,
     setPhone,

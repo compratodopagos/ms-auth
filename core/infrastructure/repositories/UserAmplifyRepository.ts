@@ -67,4 +67,8 @@ export class UserAmplifyRepository implements UserRepository {
         return await apiService.post('auth/terms', { tyc });
     }
 
+    async setNit(nit:string) {
+        return await apiService.post('auth/nit', { nit });
+    }
+
 }

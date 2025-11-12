@@ -30,10 +30,10 @@ export const companySteps: RegisterStep[] = [
     completed: false
   },
   {
-    id: "regulatory",
-    title: "Completa los datos regulatorios",
-    description: "Cumple con las normas vigentes en Colombia",
-    path: '/register/steps/regulatory',
+    id: "company",
+    title: "Completa los datos de tu empresa",
+    description: "Te pediremos subir algunos documentos y tu cédula.",
+    path: '/register/steps/company',
     completed: false
   }
 ];

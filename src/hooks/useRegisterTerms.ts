@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setTerms } from "../store/registerSlice";
-import { Terms } from "../../../entities/types";
+import { Terms } from "@core/domain/types";
 import { useNavigate } from "react-router-dom";
 
 /**

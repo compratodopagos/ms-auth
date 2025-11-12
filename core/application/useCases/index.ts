@@ -17,5 +17,7 @@ export * from './steps/SetOcupation';
 export * from './steps/SetStatement';
 export * from './steps/SetTerms';
 
+export * from './company/SetNit';
+
 export * from './liveness/GetResultLivenessSession';
 export * from './liveness/StartLivenessSession';

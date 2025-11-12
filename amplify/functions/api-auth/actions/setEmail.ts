@@ -1,15 +1,13 @@
 import { Pool } from "mysql2/promise";
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
+import { callApi } from "../../resources/apiCT";
 
-const sendCode = async (email: string): Promise<any> => {
-    const API_URL = process.env.API_URL;
-    const response = await fetch(
-        `${API_URL}/auth/verify/email/send`,
-        {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email }),
-        }
+const sendCode = async (event: APIGatewayProxyEvent, email: string): Promise<any> => {
+    const response = await callApi(
+        event,
+        "/auth/verify/email/send",
+        "POST",
+        { email }
     );
 
     console.log('payload',{
@@ -60,7 +58,7 @@ export const setEmail = async (event: APIGatewayProxyEvent, pool: Pool, poolCT: 
                 };
             } else {
                 try {
-                    const { success, message } = await sendCode(emailDecoded);
+                    const { success, message } = await sendCode(event, emailDecoded);
                     if (success) {
                         return {
                             statusCode: 200,
@@ -98,7 +96,7 @@ export const setEmail = async (event: APIGatewayProxyEvent, pool: Pool, poolCT: 
             [emailDecoded, type_account]
         );
         
-        const { success, details } = await sendCode(emailDecoded);
+        const { success, details } = await sendCode(event, emailDecoded);
         if (!success) {
             return {
                 statusCode: 409,

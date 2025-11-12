@@ -5,7 +5,7 @@ import { callApi } from "../../resources/apiCT";
 const validCode = async (event: APIGatewayProxyEvent, code: string) => {
     const { success, message } = await callApi(
         event,
-        "/public/auth/verified-phone/code",
+        "/auth/verified-phone/code",
         "POST",
         { code }
     );

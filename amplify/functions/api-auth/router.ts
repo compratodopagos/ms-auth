@@ -17,6 +17,8 @@ import { setAddress } from './actions/setAddress';
 import { setOcupation } from './actions/setOcupation';
 import { setStatement } from './actions/setStatement';
 import { setTerms } from './actions/setTerms';
+import { createCompany } from './actions/createCompany';
+import { storeDocument } from './actions/storeDocument';
 
 export const routes: Record<string, (event: APIGatewayProxyEvent, pool: Pool, poolCT: Pool, user:any) => Promise<any>> = {
     "GET:/auth/user": getUser,
@@ -29,6 +31,9 @@ export const routes: Record<string, (event: APIGatewayProxyEvent, pool: Pool, po
     "POST:/auth/password": setPassword,
     "POST:/auth/email/valid": emailValid,
     "POST:/auth/phone/valid": phoneValid,
+
+    "POST:/user/company": createCompany,
+    "POST:/user/company/documents": storeDocument,
 
     "GET:/auth/regulatory": statusRegulatory,
     "POST:/auth/country": setCountry,

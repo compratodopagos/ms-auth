@@ -14,7 +14,7 @@
     "@aws-amplify/ui-react-liveness": "^3.4.6",
     "@aws-sdk/client-rekognition": "^3.901.0",
     "@compratodo/core": "^1.0.8",
-    "@compratodo/ui-components": "^1.7.57",
+    "@compratodo/ui-components": "^1.7.60",
     "@reduxjs/toolkit": "^2.9.0",
     "aws-amplify": "^6.15.7",
     "aws-sdk": "^2.1692.0",

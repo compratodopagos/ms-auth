@@ -7,11 +7,12 @@ import {
   SetPhone, ValidPhone,
   SetDocument,
   SetCountry,
-  SetAddress
+  SetAddress,
+  SetNit
 } from "../../application/useCases";
 import { AccountType, DocumentPayload, StatusStepsType } from "../../domain/types";
 
-type Command = GetSteps | SetCountry | GetRegulatory | SetAccount | SetEmail | ValidEmail | SetPassword | SetPhone | ValidPhone | SetDocument | SetAddress;
+type Command = GetSteps | SetCountry | SetNit | GetRegulatory | SetAccount | SetEmail | ValidEmail | SetPassword | SetPhone | ValidPhone | SetDocument | SetAddress;
 
 export class UserController {
   constructor(private commandUser: Command) { }
@@ -83,6 +84,14 @@ export class UserController {
   async setDocument(payload: DocumentPayload) {
     try {
       return await (this.commandUser as SetDocument).execute(payload);
+    } catch (error) {
+      return { success: false, message: error.message || `${error}` }
+    }
+  }
+
+  async setNit(nit: string) {
+    try {
+      return await (this.commandUser as SetNit).execute(nit);
     } catch (error) {
       return { success: false, message: error.message || `${error}` }
     }

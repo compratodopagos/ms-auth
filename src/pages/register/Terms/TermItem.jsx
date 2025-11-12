@@ -33,6 +33,7 @@ export const TermItem = ({
             isOpen={isModalOpen}
             size="small"
             onClose={onOpenModal}
+            btnClassName="p-2 sm:p-3 w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center bg-[#d0f3ff] rounded-full text-(--color-text-primary) focus:outline-none focus:ring-2 focus:ring-(--color-primary) transition-colors text-sm flex-shrink-0"
         >
             {term.component}
         </Modal>

@@ -9,9 +9,10 @@ import {
     ScanLine,
     KeyRound,
     Scale,
-    PlusCircle
+    PlusCircle,
+    BuildingIcon
 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const renderIcon = (param) => {
     switch (param) {
@@ -25,6 +26,8 @@ const renderIcon = (param) => {
             return <KeyRound width={20} color="#07144E" />;
         case "password":
             return <Scale width={20} color="#07144E" />;
+        case "company":
+            return <BuildingIcon width={20} color="#07144E" />;
         default:
             return null;
     }
@@ -84,20 +87,21 @@ const CardStep = ({
                             <CheckCircle color="var(--color-accent)" stroke="var(--color-primary)" className="w-7" />
                         </Tooltip>
                         :
-                        <Button
-                            type="button"
-                            size="xs"
-                            variant={isActive[idx] ? "accent" : "light"}
-                            disabled={!isActive[idx]}
-                            aria-disabled={!isActive[idx]}
-                            onClick={() => navigateStep(step, idx)}
-                            className='container'
-                        >
-                            <div className="flex items-center justify-center m-0">
-                                <b className="mr-1 text-sm">Agregar</b>
-                                <PlusCircle width={14} />
-                            </div>
-                        </Button>
+                        <Link to={step.path}>
+                            <Button
+                                type="button"
+                                size="xs"
+                                variant={isActive[idx] ? "accent" : "light"}
+                                disabled={!isActive[idx]}
+                                aria-disabled={!isActive[idx]}
+                                className='container'
+                            >
+                                <div className="flex items-center justify-center m-0">
+                                    <b className="mr-1 text-sm">Agregar</b>
+                                    <PlusCircle width={14} />
+                                </div>
+                            </Button>
+                        </Link>
                 }
             </div>
         </Card>

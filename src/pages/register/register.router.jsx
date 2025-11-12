@@ -24,6 +24,8 @@ const Ocupation = lazy(() => import("./ViewRegulatory/steps/Ocupation.jsx"));
 const Statement = lazy(() => import("./ViewRegulatory/steps/Statement.jsx"));
 const Terms = lazy(() => import("./ViewRegulatory/steps/Terms.jsx"));
 const Completed = lazy(() => import("./Completed.jsx"));
+const NitStep = lazy(() => import("./ViewSteps/steps/NitStep/NitStep.jsx"));
+const AttorneyStep = lazy(() => import("./ViewSteps/steps/NitStep/NitStep.jsx"));
 
 const registerRoutes = [
   {
@@ -42,7 +44,7 @@ const registerRoutes = [
         path: "steps",
         children: [
           {
-            path: "",
+            index: true,
             element: (<Steps />)
           },
           {
@@ -87,6 +89,19 @@ const registerRoutes = [
                 element: (<ValidFaceStep />)
               }
             ]
+          },
+          {
+            path: "company",
+            children: [
+              {
+                index: true,
+                element: (<NitStep />)
+              },
+              {
+                path: "data",
+                element: (<AttorneyStep />)
+              }
+            ]
           }
         ]
       },
@@ -96,29 +111,29 @@ const registerRoutes = [
         children: [
           {
             index: true,
-            element: (<Country/>)
+            element: (<Country />)
           },
           {
             path: "residence",
-            element: (<Address/>)
+            element: (<Address />)
           },
           {
             path: "ocupation",
-            element: (<Ocupation/>)
+            element: (<Ocupation />)
           },
           {
             path: "statement",
-            element: (<Statement/>)
+            element: (<Statement />)
           },
           {
             path: "terms",
-            element: (<Terms/>)
+            element: (<Terms />)
           }
         ]
       },
       {
         path: "completed",
-        element: (<Completed/>)
+        element: (<Completed />)
       }
     ]
   },

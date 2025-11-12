@@ -1,15 +1,13 @@
 import { Pool } from "mysql2/promise";
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
+import { callApi } from "../../resources/apiCT";
 
-const validCode = async (email: string, code: string) => {
-    const API_URL = process.env.API_URL;
-    const response = await fetch(
-        `${API_URL}/auth/verify/email/check`,
-        {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, code }),
-        }
+const validCode = async (event: APIGatewayProxyEvent, email: string, code: string) => {
+    const response = await callApi(
+        event,
+        "/auth/verify/email/check",
+        "POST",
+        { email, code }
     );
 
     if (!response.ok) {
@@ -36,7 +34,7 @@ export const emailValid = async (event: APIGatewayProxyEvent, pool: Pool, poolCT
 
         let emailDecoded = atob(email);
 
-        const { success, message } = await validCode(emailDecoded, code);
+        const { success, message } = await validCode(event, emailDecoded, code);
         if (!success) {
             return {
                 statusCode: 409,

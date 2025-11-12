@@ -18,7 +18,7 @@ const sendCode = async (event: APIGatewayProxyEvent, poolCT:Pool, user:any) => {
     // REVISAR
     const { success, message } = await callApi(
         event,
-        "/public/notification/internal/notifications/sms",
+        "/notification/internal/notifications/sms",
         "POST",
         { phone: user.phone, message: `Tu codigo de verificacion para comprapagos es: ${newCode} Recuerda no compartirlo` },
         'notification-service-internal-token-2024-super-secret-key-microservices'
