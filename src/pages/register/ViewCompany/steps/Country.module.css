@@ -1,0 +1,28 @@
+.containerForm {
+    width: 100%;
+}
+
+.search {
+    max-width: 418px;
+    width: 100%;
+    height: 53px;
+    background: #EFEFEF;
+    border-radius: 90px;
+    padding: 15px 20px;
+}
+
+.search .inputSearch:focus-visible {
+    outline-offset: 0px;
+    outline: 0;
+}
+
+.inputClassContainer {
+    max-height: 40vh;
+    overflow: auto;
+}
+
+@media (min-width: 768px) {
+    .containerForm {
+        max-width: 500px;
+    }
+}

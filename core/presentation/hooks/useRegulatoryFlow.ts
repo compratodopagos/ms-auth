@@ -88,7 +88,7 @@ export function useRegulatoryFlow(refreshSteps = false) {
     const command = new SetStatement(userRepo);
     const { success, message } = await command.execute(statement);
     if (success) {
-      navigate('/register/regulatory/tyc');
+      navigate('/register/regulatory/terms');
     } else {
       return message;
     }

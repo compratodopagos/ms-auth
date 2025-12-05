@@ -1,0 +1,69 @@
+/* desktop */
+.container.steps {
+    width: 100%;
+    max-width: 1200px;
+}
+
+.container.steps label {
+    color: #000000;
+}
+
+.container.steps p {
+    color: #565656;
+}
+
+.sectIcon::before {
+    background-color: #dcf3f1 !important;
+    opacity: 1 !important;
+}
+
+.sectIconActive::before {
+    background-color: var(--color-primary) !important;
+    opacity: 1 !important;
+}
+
+.sectIcon,
+.sectIconActive {
+    cursor: pointer;
+}
+
+.sectIcon,
+.sectIconActive {
+    width: 60px !important;
+    height: 60px !important;
+}
+
+.sectIcons {
+    position: relative;
+    width: 100%;
+    max-width: 902px;
+}
+
+.circleIcon {
+    z-index: 2;
+}
+
+.sectIcons::before {
+    content: '';
+    position: absolute;
+    border-bottom: 1px solid;
+    width: 100%;
+    height: 0;
+    top: 30%;
+    z-index: 1;
+}
+
+@media (min-width: 768px) {
+    .card {
+        padding: 30px;
+    }
+
+    .sectIcon,
+    .sectIconActive {
+        width: 79px !important;
+        height: 79px !important;
+    }
+    .sectIcons::before {
+        top: 40%;
+    }
+}
